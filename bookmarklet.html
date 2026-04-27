@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Translate Bookmarklet</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;max-width:780px;margin:40px auto;padding:0 20px;color:#111}
+    a.bookmark{display:inline-block;padding:10px 14px;background:#0b5cff;color:#fff;border-radius:6px;text-decoration:none;margin:8px 0}
+    button{margin-left:12px}
+    pre{background:#f6f8fa;padding:12px;border-radius:6px;overflow:auto}
+  </style>
+</head>
+<body>
+  <h1>Bookmarklet Traduction</h1>
+  <p>Glisser-déposer ce lien dans la barre de favoris, ou cliquer sur <em>Copier</em> pour le coller manuellement.</p>
+
+  <p>
+    <a class="bookmark" id="bm" href="javascript:(function(){function g(){try{const s=window.getSelection&&window.getSelection().toString();if(s)return s.trim();const a=document.activeElement;return a&&(a.value||a.textContent)?(a.value||a.textContent).toString().trim():''}catch(e){}return''}const t=g()||prompt('Texte à traduire (anglais ← français) :');if(!t)return;function l(u){if(/[éèêëàâäôöùûüçœ]/i.test(u))return!0;return/\b(le|la|les|un|une|et|de|du|des|pour|avec|pas|que|qui|je|tu|il|elle|nous|vous|ils|elles)\b/i.test(u)}const target=l(t)?'en':'fr';window.open('https://translate.google.com/?sl=auto&tl='+target+'&text='+encodeURIComponent(t)+'&op=translate','_blank');})();">Traduire (glisser-déposer)</a>
+    <button id="copy">Copier</button>
+  </p>
+
+  <h2>Code du bookmarklet</h2>
+  <pre id="code">javascript:(function(){function g(){try{const s=window.getSelection&&window.getSelection().toString();if(s)return s.trim();const a=document.activeElement;return a&&(a.value||a.textContent)?(a.value||a.textContent).toString().trim():''}catch(e){}return''}const t=g()||prompt('Texte à traduire (anglais ← français) :');if(!t)return;function l(u){if(/[éèêëàâäôöùûüçœ]/i.test(u))return!0;return/\b(le|la|les|un|une|et|de|du|des|pour|avec|pas|que|qui|je|tu|il|elle|nous|vous|ils|elles)\b/i.test(u)}const target=l(t)?'en':'fr';window.open('https://translate.google.com/?sl=auto&tl='+target+'&text='+encodeURIComponent(t)+'&op=translate','_blank');})();</pre>
+
+  <h2>Utilisation</h2>
+  <ul>
+    <li>Pour installer : glisser le lien <strong>Traduire (glisser-déposer)</strong> dans la barre de favoris.</li>
+    <li>Alternative : cliquer sur <strong>Copier</strong> puis créer un nouveau favori et coller le contenu.</li>
+    <li>Sur une page, sélectionner du texte ou placer le focus dans un champ, puis cliquer sur le favori.</li>
+  </ul>
+
+  <script>
+    const code = document.getElementById('code').textContent;
+    document.getElementById('copy').addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(code);
+        alert('Bookmarklet copié dans le presse-papiers.');
+      }catch(e){
+        prompt('Copiez manuellement ce code :', code);
+      }
+    });
+  </script>
+</body>
+</html>
