@@ -25,5 +25,3 @@ Ce petit bookmarklet permet de traduire rapidement un texte (anglais ↔ frança
 - Le bookmarklet et les instructions se trouvent dans `bookmarklet.html`.
 
 ---
-
-Si vous voulez que je crée aussi un petit commit Git ou une version imprimable, dites-le-moi.
